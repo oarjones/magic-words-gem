@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Build.Reporting;
 using UnityEngine;
+using System;
 
 /// <summary>
 /// GameManager class orchestrates the overall game flow.
@@ -14,6 +16,9 @@ public class GameManager : MonoBehaviour
     public Board GameBoard { get; private set; }
 
     private WordValidator _wordValidator;
+
+    // Evento que se lanzará cuando GameManager esté listo
+    public event Action OnGameManagerReady;
 
     private void Awake()
     {
@@ -30,10 +35,16 @@ public class GameManager : MonoBehaviour
         }
 
         // Inicializa el estado del juego (GameState, Board, etc.)
-        InitializeGame();
+        InitializeGame();        
+    }
 
+    private void Start()
+    {
         // Inicializa la UI
         gameObject.AddComponent<UIManager>();
+
+        // Lanza el evento OnGameManagerReady
+        OnGameManagerReady?.Invoke();
     }
 
     /// <summary>

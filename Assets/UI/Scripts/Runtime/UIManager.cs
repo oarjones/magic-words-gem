@@ -34,11 +34,17 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        // Inicializa la UI
-        InitializeUI();
+        // Suscribimos el método InitializeUI al evento OnGameManagerReady
+        GameManager.Instance.OnGameManagerReady += InitializeUI;
 
         // Suscribe los métodos a los eventos de los botones
         _validateWordButton.onClick.AddListener(OnValidateWordButtonClicked);
+    }
+
+    private void OnDestroy()
+    {
+        // Desuscribimos el método InitializeUI del evento OnGameManagerReady
+        GameManager.Instance.OnGameManagerReady -= InitializeUI;
     }
 
     /// <summary>
