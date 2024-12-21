@@ -31,6 +31,9 @@ public class GameManager : MonoBehaviour
 
         // Inicializa el estado del juego (GameState, Board, etc.)
         InitializeGame();
+
+        // Inicializa la UI
+        gameObject.AddComponent<UIManager>();
     }
 
     /// <summary>
