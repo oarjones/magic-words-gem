@@ -1,4 +1,3 @@
-
 /// <summary>
 /// Interface for providing a list of valid words.
 /// </summary>

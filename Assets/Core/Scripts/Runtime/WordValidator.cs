@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +9,7 @@ public class WordValidator : MonoBehaviour
 {
     private IWordProvider _wordProvider;
 
+    // Constructor que recibe una implementación de IWordProvider
     public WordValidator(IWordProvider wordProvider)
     {
         _wordProvider = wordProvider;
