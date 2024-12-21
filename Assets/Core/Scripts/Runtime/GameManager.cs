@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     // Instance of the GameManager for the Singleton pattern
     public static GameManager Instance { get; private set; }
     public GameState GameState { get; private set; }
-    public Board GameBoard { get; private set; }
+    public Board GameBoard;
 
     private WordValidator _wordValidator;
 
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     private void InitializeGame()
     {
         // Crea una instancia del tablero
-        GameBoard = gameObject.AddComponent<Board>();
+        //GameBoard = gameObject.AddComponent<Board>();
         // Por ahora, el tamaño del tablero será fijo, pero se podría parametrizar más adelante.
         GameBoard.Initialize(7, 7);
 

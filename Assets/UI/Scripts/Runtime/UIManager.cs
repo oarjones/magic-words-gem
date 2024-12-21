@@ -30,12 +30,14 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        // Suscribimos el método InitializeUI al evento OnGameManagerReady
+        GameManager.Instance.OnGameManagerReady += InitializeUI;
     }
 
     private void Start()
     {
-        // Suscribimos el método InitializeUI al evento OnGameManagerReady
-        GameManager.Instance.OnGameManagerReady += InitializeUI;
+        
 
         // Suscribe los métodos a los eventos de los botones
         _validateWordButton.onClick.AddListener(OnValidateWordButtonClicked);
@@ -60,9 +62,6 @@ public class UIManager : MonoBehaviour
         UpdateScoreText();
     }
 
-    /// <summary>
-    /// Creates the UI representation of the game board.
-    /// </summary>
     private void CreateBoardUI()
     {
         // Obtiene la referencia al Board del GameManager
@@ -73,18 +72,25 @@ public class UIManager : MonoBehaviour
         {
             for (int x = 0; x < board.Width; x++)
             {
+                // Obtiene la celda del Board
+                HexCell cell = board.GetCell(x, y);
+
                 // Crea una instancia del prefab de la celda
                 Button cellButton = Instantiate(_hexCellPrefab, _boardPanel.transform);
 
                 // Configura el botón
-                HexCell cell = board.GetCell(x, y);
-                cellButton.GetComponentInChildren<TextMeshProUGUI>().text = cell.Letter.ToString();
-
-                // Obtenemos el script HexCellButton del botón y le asignamos la celda
                 var hexCellButton = cellButton.GetComponent<HexCellButton>();
+
+                // Asigna la referencia a la celda del tablero
                 hexCellButton.Cell = cell;
 
-                // Suscribimos el método OnCellClicked al evento OnCellClicked del script HexCellButton
+                // Asigna la referencia al prefab al HexCell
+                cell.CellPrefab = cellButton.gameObject;
+
+                // Configura el texto del botón
+                hexCellButton.Label.text = cell.Letter.ToString();
+
+                // Suscribe el método OnCellClicked al evento OnCellClicked del script HexCellButton
                 hexCellButton.OnCellClicked.AddListener(OnCellClicked);
             }
         }

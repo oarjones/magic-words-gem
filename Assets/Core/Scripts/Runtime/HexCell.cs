@@ -10,6 +10,9 @@ public class HexCell
     public char Letter { get; set; }
     public string OwnerPlayerId { get; set; } // ID del jugador propietario de la celda, si corresponde
 
+    // Referencia al prefab de la celda (botón)
+    public GameObject CellPrefab { get; set; }
+
     public HexCell(int x, int y)
     {
         X = x;
