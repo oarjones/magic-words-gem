@@ -20,14 +20,14 @@ public class GameState : MonoBehaviour
     public Dictionary<string, Player> Players { get; private set; } // Información de los jugadores
     public string CurrentPlayerId { get; private set; } // ID del jugador actual
     public string CurrentWord { get; private set; }
-    public List<string> WordHistory { get; private set; }
+    public List<HexCell> WordHistory { get; private set; }
 
     private void Awake()
     {
         // Inicializar valores por defecto
         Status = GameStatus.Waiting;
         Players = new Dictionary<string, Player>();
-        WordHistory = new List<string>();
+        WordHistory = new List<HexCell>();
         CurrentWord = "";
     }
 
@@ -90,7 +90,7 @@ public class GameState : MonoBehaviour
     /// </summary>
     public void SubmitCurrentWord()
     {
-        WordHistory.Add(CurrentWord);
+        WordHistory.Clear();
         ClearCurrentWord();
     }
 

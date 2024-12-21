@@ -99,6 +99,9 @@ public class Board : MonoBehaviour
     /// <returns>True if the move is legal, false otherwise.</returns>
     public bool IsLegalMove(HexCell from, HexCell to)
     {
+        // Si no se ha seleccionado ninguna celda previamente, cualquier movimiento es válido.
+        if (from == null) return true;
+
         // Comprueba si la celda de destino está entre las adyacentes a la celda de origen
         List<HexCell> neighbors = GetNeighbors(from.X, from.Y);
         return neighbors.Contains(to);
